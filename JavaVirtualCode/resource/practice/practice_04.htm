@@ -1,0 +1,2160 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=x-cp20936">
+<meta name=Generator content="Microsoft Word 14 (filtered)">
+<title>Java小程序&#8212;&#8212;五子棋</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+@font-face
+	{font-family:"\@宋体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Times New Roman","serif";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	layout-grid-mode:char;
+	border:none;
+	padding:0cm;
+	font-size:9.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	layout-grid-mode:char;
+	font-size:9.0pt;
+	font-family:"Times New Roman","serif";}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	layout-grid:15.6pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body bgcolor=white lang=ZH-CN style='text-justify-trim:punctuation'>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+style='font-size:18.0pt'>Java</span><span style='font-size:18.0pt;font-family:
+宋体'>小程序&#8212;&#8212;五子棋</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:12.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>五子棋程序是一种常见的棋类游戏程序，对弈双方轮流下子，直到有一方有</span></b><b><span
+lang=EN-US style='font-size:12.0pt'>5</span></b><b><span style='font-size:12.0pt;
+font-family:宋体'>颗棋子在行、列或者两个对角线方向上连续摆放，程序即告结束，该方胜利。本范例演示了一种简单的五子棋程序，重点请注意判断五子相连功能的实现方法。</span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:12.0pt'><b><span
+lang=EN-US style='font-size:12.0pt'>&nbsp;</span></b></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:0cm;line-height:12.0pt'><b><span
+lang=EN-US style='font-size:12.0pt'>一．</span></b><b><span style='font-size:
+12.0pt;font-family:宋体'>创建五子棋窗体</span></b></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><b><span style='font-size:12.0pt;
+font-family:宋体'>这一阶段程序定义了显示五子棋的面板类</span></b><b><span lang=EN-US
+style='font-size:12.0pt'>DrawPanel</span></b><b><span style='font-size:12.0pt;
+font-family:宋体'>。</span></b></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>运行后的效果图</span></u></b></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>开局</span></u></b></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US><img width=496
+height=518 src="practice_04.files/image001.jpg"></span></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>代码如下</span></u></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>//</span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>测试类</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><b><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>class</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> Exec {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>static</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>void</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+main(String[] args) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>创建窗体类变量</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DemoWindow
+dw = </span><b><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#7F0055'>new</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'> DemoWindow(</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#2A00FF'>&quot;</span><span
+style='font-size:14.0pt;font-family:Consolas;color:#2A00FF'>五子棋<span
+lang=EN-US>&quot;</span></span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>居中显示窗体</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Toolkit
+theKit = dw.getToolkit();</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dimension
+wndSize = theKit.getScreenSize();</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw.setLocation(wndSize.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>width</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> / 2 -
+dw.getWidth() / 2, wndSize.</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>height</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /
+2 - dw.getHeight() / 2);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>点击关闭按钮可以退出程序</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw.setDefaultCloseOperation(JFrame.</span><i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>EXIT_ON_CLOSE</span></i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>设置窗体为可见</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw.setVisible(</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>true</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>}</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>界面窗体</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><b><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>class</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> <u>DemoWindow</u>
+</span><b><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#7F0055'>extends</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'> JFrame {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>默认棋盘宽度（允许自行调整，最小值为<span
+lang=EN-US>40</span>，设置的值要为<span lang=EN-US>20</span>的倍数）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>final</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>size</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = 480;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>显示五子棋的面板</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; DrawPanel
+</span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>bp</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'> DrawPanel(</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>size</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>构造函数</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+DemoWindow(String title) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>super</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>(title);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>不允许调整窗体大小</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setResizable(</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>窗体布局</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add(</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>bp</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pack();</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black'>}</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>显示五子棋的面板类</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><b><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>class</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> <u>DrawPanel</u>
+</span><b><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#7F0055'>extends</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'> JPanel </span><b><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>implements</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+MouseListener {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>棋盘宽度</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>size</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>是否黑方走</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>boolean</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isBlack</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存屏幕的缓冲图像，防止刷新窗体导致图像消失</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; BufferedImage
+</span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>image</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#7F0055'>null</span></b><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>鼠标的点击位置</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; Point </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> Point();</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>是否需要绘制新的棋子</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>boolean</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isNeedRefresh</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>表示棋子位置的数组（<span
+lang=EN-US>0</span>代表没有棋子，<span lang=EN-US>1</span>代表黑子，<span lang=EN-US>2</span>代表白子）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[][] </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>null</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>构造函数</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+DrawPanel(</span><b><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#7F0055'>int</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'> size) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>设置宽度</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>this</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>size</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = size;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>生成合适大小的表示棋子位置的数组（每格的宽度和高度都为<span
+lang=EN-US>20</span>像素）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[size / 20
+- 1][size / 20 - 1];</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>设置大小，正好显示整个棋盘</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setPreferredSize(</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+Dimension(size, size));</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>重载的绘图函数，在图像缓冲上绘制棋盘和棋子，然后将图像绘制到面板上</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>void</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+paintComponent(Graphics g) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>super</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.paintComponent(g);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果是新的一局，重绘棋盘</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>image</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> == </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>null</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>创建图像缓冲</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>image</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+BufferedImage(1000, 1000, BufferedImage.</span><i><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>TYPE_INT_RGB</span></i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>获取图像缓冲的绘图类变量</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Graphics
+uig = </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>image</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'>.createGraphics();</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>绘制桔黄色背景</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uig.setColor(Color.</span><i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>orange</span></i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uig.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>fillRect</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>(0, 0,
+1000, 1000);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>绘制黑色棋盘网格</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uig.setColor(Color.</span><i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>black</span></i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> i = 0; i
+&lt;= </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>size</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'> - 40; i += 20) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uig.drawLine(i
++ 20, 20, i + 20, </span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:#0000C0'>size</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'> - 20);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uig.drawLine(20,
+i + 20, </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>size</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'> - 20, i + 20);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果是在一局当中，无需重新绘制棋盘表格，只需绘制新的棋子即可</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果需要绘制新的棋子，而不是单纯的刷新屏幕</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isNeedRefresh</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>获取图像缓冲的绘图类变量</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Graphics
+uig = </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>image</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'>.createGraphics();</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果是黑方</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isBlack</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> == </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>true</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>将前景色设置为黑色</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uig.setColor(Color.</span><i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>black</span></i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果是白方</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isBlack</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> == </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>将前景色设置为白色</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uig.setColor(Color.</span><i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>white</span></i><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>绘制圆形棋子</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uig.fillOval(</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>x</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> - 9, </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>y</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> - 9, 18,
+18);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>将图像绘制到面板上</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.drawImage(</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>image</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>, 0, 0, </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>this</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果刷新窗体，无需绘制新的棋子</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isNeedRefresh</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:0cm;line-height:12.0pt'><b><span
+lang=EN-US style='font-size:12.0pt'>二．</span></b><b><span style='font-size:
+12.0pt;font-family:宋体'>添加鼠标事件监听功能</span></b></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><b><span style='font-size:12.0pt;
+font-family:宋体'>这一阶段实现通过点击棋盘来落子</span></b></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>运行效果如下</span></u></b></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>黑方落子</span></u></b></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US><img width=496
+height=518 src="practice_04.files/image002.jpg"></span></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>白方落子</span></u></b></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US><img width=496
+height=518 src="practice_04.files/image003.jpg"></span></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>在面板类中添加</span></u></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F;background:#D9D9D9'>//
+</span><span style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F;
+background:#D9D9D9'>添加事件监听器</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black;background:#D9D9D9'>addMouseListener(</span><b><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#7F0055;background:#D9D9D9'>this</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black;background:
+#D9D9D9'>);</span></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体;
+color:black'>并添加如下代码</span></u></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>响应单击鼠标</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>void</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+mouseClicked(MouseEvent e) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>获取鼠标单击的位置</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> x =
+e.getX();</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> y =
+e.getY();</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>获取最近的棋盘网格点</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (x % 20
+&lt;= 10)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>x</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = x - x %
+20;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>x</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = x - x %
+20 + 20;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (y % 20
+&lt;= 10)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>y</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = y - y %
+20;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>y</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = y - y %
+20 + 20;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果点击在棋盘网格外，则退出</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>x</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> == 0 || </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>x</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> == </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>size</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> || </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>y</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> == 0 || </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>y</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> == </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>size</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>return</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果该位置没有棋子</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>x</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> / 20 -
+1][</span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>point</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'>.</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>y</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:black'> / 20 - 1] == 0) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>需要绘制新的棋子</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isNeedRefresh</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>true</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果当前是黑方，切换为白方，否则切换为黑方</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isBlack</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> == </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>true</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isBlack</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>设置黑方棋子的位置</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>x</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> / 20 -
+1][</span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>point</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'>.</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>y</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:black'> / 20 - 1] = 1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+</span><b><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#7F0055'>else</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'> {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isBlack</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>true</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>设置白方棋子的位置</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>x</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> / 20 -
+1][</span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>point</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'>.</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>y</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:black'> / 20 - 1] = 2;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black'>}</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>重绘面板</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repaint();</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black'>}</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><b><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>void</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+mouseEntered(MouseEvent e) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>void</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+mouseExited(MouseEvent e) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>void</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+mousePressed(MouseEvent e) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>void</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+mouseReleased(MouseEvent e) {</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:0cm;line-height:12.0pt'><b><span
+lang=EN-US style='font-size:12.0pt'>三．</span></b><b><span style='font-size:
+12.0pt;font-family:宋体'>设置规则</span></b></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><b><span style='font-size:12.0pt;
+font-family:宋体'>这一阶段程序通过调用</span></b><b><span lang=EN-US style='font-size:12.0pt'>checkCols,checkRows,checkBias3</span></b><b><span
+style='font-size:12.0pt;font-family:宋体'>个函数方法来检查行方向，列方向和两个对角线方向是否存在五子相连的情况，如有，则重新开始新的游戏，并规定输方下轮先走。</span></b></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>添加函数前</span></u></b></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US><img width=496
+height=518 src="practice_04.files/image004.jpg"></span></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>添加函数后</span></u></b></p>
+
+<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US><img width=278
+height=128 src="practice_04.files/image005.jpg"></span></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体'>代码如下</span></u></b></p>
+
+<p class=MsoNormal><b><span style='font-size:16.0pt;font-family:宋体'>在</span></b><b><span
+lang=EN-US style='font-size:16.0pt'>mouseClicked</span></b><b><span
+style='font-size:16.0pt;font-family:宋体'>中添加</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>判断输赢（横向、纵向和两个斜角方向是否有<span
+lang=EN-US>5</span>个连珠）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+(checkRows() || checkCols() || checkBias()) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果当前是黑方，黑方胜，否则白方胜</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>isBlack</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> == </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>true</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JOptionPane.<i>showMessageDialog</i>(</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>null</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>, </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#2A00FF'>&quot;</span><span
+style='font-size:14.0pt;font-family:Consolas;color:#2A00FF'>黑方胜利！<span
+lang=EN-US>&quot;</span></span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JOptionPane.<i>showMessageDialog</i>(</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>null</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>, </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#2A00FF'>&quot;</span><span
+style='font-size:14.0pt;font-family:Consolas;color:#2A00FF'>白方胜利！<span
+lang=EN-US>&quot;</span></span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>重置棋子位置数组</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>size</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> / 20 -
+1][</span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>size</span><span lang=EN-US style='font-size:14.0pt;font-family:
+Consolas;color:black'> / 20 - 1];</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>重置图像缓冲</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>image</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>null</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>重置鼠标点击位置</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>point</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> Point();</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>重绘面板（输方下轮先走）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repaint();</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal><b><u><span style='font-size:16.0pt;font-family:宋体;
+color:black'>定义并实现检查函数</span></u></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>检查横向是否存在<span
+lang=EN-US>5</span>个连珠</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>boolean</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+checkCols() {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>循环棋子位置数组的每一行</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> i = 0; i
+&lt; </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>.</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>; i++) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>统计连珠的次数</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> sumFlag =
+1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>前一个位置的状态（<span
+lang=EN-US>-1</span>为初始值，<span lang=EN-US>0</span>代表没有棋子，<span lang=EN-US>1</span>代表黑子，<span
+lang=EN-US>2</span>代表白子）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+preElement = -1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>循环棋子位置数组的每一列</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> j = 0; j
+&lt; </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>[i].</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>; j++) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果颜色和前一个棋子一样（不考虑没有棋子的情况），累加连珠次数，否则将连珠次数重新置为<span
+lang=EN-US>1</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[i][j] ==
+preElement &amp;&amp; </span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>elements</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>[i][j] != 0)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag++;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag
+= 1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存前一个位置的状态</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; preElement
+= </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>[i][j];</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>已有<span lang=EN-US>5</span>个连珠，返回真表示有胜利方</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (sumFlag
+&gt;= 5)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>return</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>true</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>return</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>检查纵向是否存在<span
+lang=EN-US>5</span>个连珠</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>boolean</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+checkRows() {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>循环棋子位置数组的每一列</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> i = 0; i
+&lt; </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>.</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>; i++) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>统计连珠的次数</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> sumFlag =
+1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>上一个位置的状态（<span
+lang=EN-US>-1</span>为初始值，<span lang=EN-US>0</span>代表没有棋子，<span lang=EN-US>1</span>代表黑子，<span
+lang=EN-US>2</span>代表白子）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+preElement = -1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>循环棋子位置数组的每一行</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> j = 0; j
+&lt; </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>[i].</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>; j++) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果颜色和上一个棋子一样（不考虑没有棋子的情况），累加连珠次数，否则将连珠次数重新置为<span
+lang=EN-US>1</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[j][i] ==
+preElement &amp;&amp; </span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>elements</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>[j][i] != 0)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag++;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag
+= 1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存上一个位置的状态</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; preElement
+= </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>[j][i];</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>已有<span lang=EN-US>5</span>个连珠，返回真表示有胜利方</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (sumFlag
+&gt;= 5)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>return</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>true</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>return</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>检查两个斜角方向是否存在<span
+lang=EN-US>5</span>个连珠</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055;
+background:silver'>boolean</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'> checkBias() {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>检查<span lang=EN-US>45</span>度斜角方向是否存在<span
+lang=EN-US>5</span>个连珠（检查棋盘的左上半边部分）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>从第五行开始，直到最后一行</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> i = 4; i
+&lt; </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>.</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>; i++) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>统计连珠的次数</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> sumFlag =
+1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>上一个位置的状态（<span
+lang=EN-US>-1</span>为初始值，<span lang=EN-US>0</span>代表没有棋子，<span lang=EN-US>1</span>代表黑子，<span
+lang=EN-US>2</span>代表白子）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+preElement = -1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存上一行的行号（ 在检查每行时，不断的拿上一行的后一个棋子与当前棋子进行比较）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> tempI =
+i;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>从第一列开始，不断的与右上方棋子比较，直到抵达棋盘边界为止</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> j = 0;
+tempI &gt;= 0; j++) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果颜色和上一个棋子一样（不考虑没有棋子的情况），累加连珠次数，否则将连珠次数重新置为<span
+lang=EN-US>1</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[tempI][j]
+== preElement &amp;&amp; </span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>elements</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>[tempI][j] != 0)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag++;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag
+= 1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存上一个位置的状态</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; preElement
+= </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>[tempI][j];</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>已有<span lang=EN-US>5</span>个连珠，返回真表示有胜利方</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (sumFlag
+&gt;= 5)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055;
+background:silver'>return</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black;background:silver'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055;
+background:silver'>true</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black;background:silver'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>获取上一行行号</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tempI--;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>检查<span lang=EN-US>45</span>度斜角方向是否存在<span
+lang=EN-US>5</span>个连珠（检查棋盘的右下半边部分）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>从倒数第五行开始，直到第一行</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> i = </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>length</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> - 4 - 1;
+i &gt;= 0; i--) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>统计连珠的次数</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> sumFlag =
+1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>上一个位置的状态（<span
+lang=EN-US>-1</span>为初始值，<span lang=EN-US>0</span>代表没有棋子，<span lang=EN-US>1</span>代表黑子，<span
+lang=EN-US>2</span>代表白子）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+preElement = -1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存下一行的行号（ 在检查每行时，不断的拿下一行的前一个棋子与当前棋子进行比较）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> tempI =
+i;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>从最后一列开始，不断的与左下方棋子比较，直到抵达棋盘边界为止</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> j = </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>length</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> - 1;
+tempI &lt; </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>.</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>; j--) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>如果颜色和上一个棋子一样（不考虑没有棋子的情况），累加连珠次数，否则将连珠次数重新置为<span
+lang=EN-US>1</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[tempI][j]
+== preElement &amp;&amp; </span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>elements</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>[tempI][j] != 0)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag++;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag
+= 1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存上一个位置的状态</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; preElement
+= </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>[tempI][j];</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>已有<span lang=EN-US>5</span>个连珠，返回真表示有胜利方</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (sumFlag
+&gt;= 5)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055;
+background:silver'>return</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black;background:silver'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055;
+background:silver'>true</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black;background:silver'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>获取下一行行号</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tempI++;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>检查<span lang=EN-US>135</span>度斜角方向是否存在<span
+lang=EN-US>5</span>个连珠（检查棋盘的左下半边部分）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>从倒数第五行开始，直到第一行</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> i = </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>length</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> - 4 - 1;
+i &gt;= 0; i--) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>统计连珠的次数</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> sumFlag =
+1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>上一个位置的状态（<span
+lang=EN-US>-1</span>为初始值，<span lang=EN-US>0</span>代表没有棋子，<span lang=EN-US>1</span>代表黑子，<span
+lang=EN-US>2</span>代表白子）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+preElement = -1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存下一行的行号（ 在检查每行时，不断的拿下一行的后一个棋子与当前棋子进行比较）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> tempI =
+i;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>从第一列开始，不断的与右下方棋子比较，直到抵达棋盘边界为止</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> j = 0;
+tempI &lt; </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>.</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>; j++) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[tempI][j]
+== preElement &amp;&amp; </span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>elements</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>[tempI][j] != 0)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag++;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag
+= 1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存上一个位置的状态</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; preElement
+= </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>[tempI][j];</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>已有<span lang=EN-US>5</span>个连珠，返回真表示有胜利方</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (sumFlag
+&gt;= 5)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055;
+background:silver'>return</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black;background:silver'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055;
+background:silver'>true</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black;background:silver'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>获取下一行行号</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tempI++;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>检查<span lang=EN-US>135</span>度斜角方向是否存在<span
+lang=EN-US>5</span>个连珠（检查棋盘的右上半边部分）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>从第五行开始，直到最后一行</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> i = 4; i
+&lt; </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>.</span><span lang=EN-US style='font-size:
+14.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>; i++) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>统计连珠的次数</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> sumFlag =
+1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>上一个位置的状态（<span
+lang=EN-US>-1</span>为初始值，<span lang=EN-US>0</span>代表没有棋子，<span lang=EN-US>1</span>代表黑子，<span
+lang=EN-US>2</span>代表白子）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>
+preElement = -1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存上一行的行号（ 在检查每行时，不断的拿上一行的前一个棋子与当前棋子进行比较）</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> tempI =
+i;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>从最后一列开始，不断的与左上方棋子比较，直到抵达棋盘边界为止</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> j = </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>length</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> - 1;
+tempI &gt;= 0; j--) {</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#0000C0'>elements</span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'>[tempI][j]
+== preElement &amp;&amp; </span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:#0000C0'>elements</span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>[tempI][j] != 0)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag++;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sumFlag
+= 1;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>保存上一个位置的状态</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; preElement
+= </span><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:#0000C0'>elements</span><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black'>[tempI][j];</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>已有<span lang=EN-US>5</span>个连珠，返回真表示有胜利方</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:black'> (sumFlag
+&gt;= 5)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055;
+background:silver'>return</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black;background:silver'> </span><b><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#7F0055;
+background:silver'>true</span></b><span lang=EN-US style='font-size:14.0pt;
+font-family:Consolas;color:black;background:silver'>;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:14.0pt;font-family:Consolas;color:#3F7F5F'>获取上一行行号</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tempI--;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black'>return false;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt;font-family:Consolas;
+color:black'>}</span></p>
+
+</div>
+
+</body>
+
+</html>

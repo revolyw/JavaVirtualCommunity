@@ -1,0 +1,1346 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+<meta name=Generator content="Microsoft Word 14 (filtered)">
+<title>Java小程序——画笔</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+@font-face
+	{font-family:"\@宋体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Times New Roman","serif";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	layout-grid-mode:char;
+	border:none;
+	padding:0cm;
+	font-size:9.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	layout-grid-mode:char;
+	font-size:9.0pt;
+	font-family:"Times New Roman","serif";}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	layout-grid:15.6pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=ZH-CN style='text-justify-trim:punctuation'>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+<p class=MsoNormal align=center style='text-align:center;text-indent:36.15pt'><b><span
+lang=EN-US style='font-size:18.0pt'>Java</span></b><a name="_GoBack"></a><b><span
+style='font-size:18.0pt;font-family:宋体'>小程序——九宫格</span></b></p>
+
+<p class=MsoNormal style='text-indent:28.1pt'><b><span style='font-size:14.0pt;
+font-family:宋体'>九宫格是一种传统的游戏程序，通过生成随机排列的数字方块，允许用户童工单机来移动方块，不过只有靠近空格的方块才能被移动。当所有的数字按序排列整齐后，游戏程序即告结束。本范例演示了一种简单的九宫格程序，重点请注意移动方块的实现方法。</span></b></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:28.0pt'><span lang=EN-US
+style='font-size:14.0pt'>一．</span><span style='font-size:14.0pt;font-family:
+宋体'>创建基本窗体</span></p>
+
+<p class=MsoNormal style='text-indent:28.0pt'><span style='font-size:14.0pt;
+font-family:宋体'>该阶段主要定义了九宫格窗体类</span><span lang=EN-US style='font-size:14.0pt'>DemoWindow,</span><span
+style='font-size:14.0pt;font-family:宋体'>该类包含一个显示九宫格界面的面板类</span><span
+lang=EN-US style='font-size:14.0pt'>GridPanel</span><span style='font-size:
+14.0pt;font-family:宋体'>和一个控制面板类</span><span lang=EN-US style='font-size:14.0pt'>ControlPanel</span><span
+style='font-size:14.0pt;font-family:宋体'>。</span><span lang=EN-US
+style='font-size:14.0pt'>GridPanel</span><span style='font-size:14.0pt;
+font-family:宋体'>类的构造函数接收一个整型参数，可以生成指定行列数的随机数组和相应的按钮数组，两者一一对应，按钮的标签是对应数值数组元素的数值，如果数值为最大值，则对应按钮显示空格标签。</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt'><u><span style='font-size:16.0pt;
+font-family:宋体'>运行效果如下</span></u></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US><img width=455
+height=256 id="图片框 1027" src="practice_03.files/image001.jpg"></span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>//</span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>测试类</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;text-autospace:none'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>publicclass</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> Exec {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>publicstaticvoid</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+main(String[] args) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>创建窗体类变量</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DemoWindow
+dw = </span><b><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#7F0055'>new</span></b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'> DemoWindow(</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>&quot;</span><span
+style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>九宫格<span
+lang=EN-US>&quot;</span></span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>将窗体的宽度和高度分别设置为屏幕宽度和屏幕高度的<span
+lang=EN-US>1/3</span>，左上角位置也设置为屏幕宽度和屏幕高度的<span lang=EN-US>1/3</span>处</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Toolkit
+theKit = dw.getToolkit();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dimension
+wndSize = theKit.getScreenSize();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw.setBounds(wndSize.</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>width</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> / 3,
+wndSize.</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>height</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'> / 3, wndSize.</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>width</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> / 3,</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wndSize.</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>height</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> / 3);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>点击关闭按钮可以退出程序</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw.setDefaultCloseOperation(JFrame.</span><i><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>EXIT_ON_CLOSE</span></i><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>设置窗体为可见</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw.setVisible(</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>true</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>}</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>界面窗体</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;text-autospace:none'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>class</span></b><u><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>DemoWindow</span></u><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>extends</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> JFrame {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>显示九宫格界面的面板</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; GridPanel
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>gp</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> GridPanel(3);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>控制面板</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; ControlPanel
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>cp</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> ControlPanel(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>gp</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>构造函数</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+DemoWindow(String title) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>super</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>(title);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>窗体布局</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>gp</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>, <u>BorderLayout</u>.</span><i><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>CENTER</span></i><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>cp</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>,
+BorderLayout.</span><i><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:#0000C0'>EAST</span></i><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>}</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>显示九宫格界面的面板类</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;text-autospace:none'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>class</span></b><u><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>GridPanel</span></u><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>extends</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> JPanel </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>implements</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+ActionListener {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>显示数字的按钮数组</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; JButton[]
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>jbs</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>行数</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> = 0;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>用于检查是否移动成功的数值数组</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[] </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>构造函数</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+GridPanel(</span><b><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#7F0055'>int</span></b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'> number) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>设置行数</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>this</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> = number;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>创建显示数字的按钮数组</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jbs</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+JButton[number * number];</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>创建用于检查是否移动成功的数值数组</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> = </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>newint</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[number *
+number];</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>面板布局</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setLayout(</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+GridLayout(number, number));</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> i = 0; i
+&lt;</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>jbs</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'>.</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>; i++) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>所有按钮的初始标题为空</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jbs</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[i] = </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> JButton(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>&quot;&quot;</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jbs</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[i].setFont(</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> Font(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>&quot;</span><span
+style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>黑体<span lang=EN-US>&quot;</span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>, Font.</span><i><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>BOLD</span></i><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>, 32));</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>初始化随机数字</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initialize();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>初始化随机数字的函数</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>publicvoid</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+initialize() {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>利用数值数组来初始化显示数字的按钮数组</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initializeButton(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jbs</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>该函数利用数值数组初始化显示数字的按钮数组</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>privatevoid</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> initializeButton(JButton[]
+jbs) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>循环遍历每个数值数组元素</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> i = 0; i
+&lt; jbs.</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>length</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>; i++) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>如果不为最大的数，将值直接设置成按钮标题</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[i] != </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> * </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>)</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jbs[i].setText(String.<i>valueOf</i>(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[i]));</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>如果是最大的数，将对应的按钮标题设置为空</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>else</span></b></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jbs[i].setText(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>&quot;&quot;</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>控制面板类</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;text-autospace:none'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>class</span></b><u><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>ControlPanel</span></u><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>extends</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> JPanel </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>implements</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+ActionListener {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>布局面板</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; JPanel
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>jp1</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> JPanel();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; JPanel
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>jp2</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> JPanel();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; JPanel
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>jp3</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> JPanel();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; JPanel
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>jp4</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> JPanel();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; JPanel
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>jp5</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> JPanel();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>操作按钮</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; JButton
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>jb1</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> JButton(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>&quot;</span><span
+style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>重来<span lang=EN-US>&quot;</span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; JButton
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>jb2</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>new</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> JButton(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>&quot;</span><span
+style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>退出<span lang=EN-US>&quot;</span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>显示九宫格界面的面板类变量引用</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; GridPanel
+</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>gp</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:black'> = </span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>null</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>构造函数</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+ControlPanel(GridPanel gp) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>面板布局</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setLayout(</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>new</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+GridLayout(5, 1));</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jp2</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>.add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jb1</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jp4</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>.add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jb2</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jp1</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jp2</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jp3</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jp4</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jp5</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>设置显示九宫格界面的面板类变量引用</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>this</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>.</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>gp</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> = gp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:30.0pt'><span lang=EN-US
+style='font-size:15.0pt;font-family:Consolas;color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:30.0pt'><span lang=EN-US
+style='font-size:15.0pt'>二．</span><span style='font-size:15.0pt;font-family:
+宋体'>添加单击鼠标事件</span></p>
+
+<p class=MsoNormal style='text-indent:30.0pt'><span style='font-size:15.0pt;
+font-family:宋体'>在用户单击按钮时，程序判断当前按钮的方位和与空格按钮的位置关系，并适时交换按钮标签和相应的数值数组元素。在每一次移动操作后，程序都会判断数值数组是否已经排好序列，即判断是否移动成功。</span><span
+lang=EN-US style='font-size:15.0pt'>ControlPanel</span><span style='font-size:
+15.0pt;font-family:宋体'>类提供了重来游戏和退出游戏的控制功能。</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt'><u><span style='font-size:16.0pt;
+font-family:宋体'>点击</span></u><u><span lang=EN-US style='font-size:16.0pt'>2</span></u><u><span
+style='font-size:16.0pt;font-family:宋体'>前</span></u></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt'><img width=455 height=256 id="图片框 1028"
+src="practice_03.files/image001.jpg"></span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt'><u><span style='font-size:16.0pt;
+font-family:宋体'>点击</span></u><u><span lang=EN-US style='font-size:16.0pt'>2</span></u><u><span
+style='font-size:16.0pt;font-family:宋体'>后</span></u></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt'><img width=455 height=256 id="图片框 1029"
+src="practice_03.files/image002.jpg"></span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt'><u><span style='font-size:16.0pt;
+font-family:宋体'>点击重来</span></u></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt'><img width=455 height=256 id="图片框 1030"
+src="practice_03.files/image003.jpg"></span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt'><u><span style='font-size:16.0pt;
+font-family:宋体'>在构造函数中添加</span></u></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>添加事件监听器</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jbs</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[i].addActionListener(</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>this</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jbs</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[i]);</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt'><u><span style='font-size:16.0pt;
+font-family:宋体;color:black'>在</span></u><u><span style='font-size:16.0pt;
+font-family:Consolas;color:black;background:white'>初始化随机数字的函数</span></u><u><span
+style='font-size:16.0pt;font-family:宋体;color:black;background:white'>中添加</span></u></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>初始化用于检查是否移动成功的数值数组</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initializeRandomNumber(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt;text-autospace:none'><u><span
+style='font-size:16.0pt;font-family:宋体;color:black'>并添加</span></u></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>响应单击按钮</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>publicvoid</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+actionPerformed(ActionEvent e) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JButton
+jb = (JButton) e.getSource();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>不处理单击空白按钮</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+(!jb.getText().equals(</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#2A00FF'>&quot;&quot;</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>)) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>获取当前按钮的标题</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+currentNumber = Integer.<i>parseInt</i>(jb.getText());</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>获取对应数字在数值数组中的位置</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+currentPos = -1;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> i = 0; i
+&lt;</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>records</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>.</span><span lang=EN-US style='font-size:
+12.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>; i++) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[i] ==
+currentNumber) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; currentPos
+= i;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>break</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>如果单击的按钮不位于第一行，并且上一行的对应按钮标题为空，交换按钮标题和对应的数值数组元素</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+(currentPos &gt;= </span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:#0000C0'>number</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &amp;&amp;</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[currentPos
+- </span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>number</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>] == </span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> * </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exchangetTwoNumber(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>,
+currentPos, currentPos - </span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#0000C0'>number</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exchangeLabel(currentPos,
+currentPos - </span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>number</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>如果单击的按钮不位于最后一行，并且下一行的对应按钮标题为空，交换按钮标题和对应的数值数组元素</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+(currentPos &lt;</span><span lang=EN-US style='font-size:12.0pt;font-family:
+Consolas;color:#0000C0'>number</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'> * </span><span lang=EN-US style='font-size:
+12.0pt;font-family:Consolas;color:#0000C0'>number</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> - </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &amp;&amp;</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[currentPos
++ </span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>number</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>] == </span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> * </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exchangetTwoNumber(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>,
+currentPos, currentPos + </span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#0000C0'>number</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exchangeLabel(currentPos,
+currentPos + </span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>number</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>如果单击的按钮不位于第一列，并且左列的对应按钮标题为空，交换按钮标题和对应的数值数组元素</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+(currentPos % </span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>number</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'> != 0</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &amp;&amp;</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[currentPos
+- 1] == </span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>number</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'> * </span><span lang=EN-US style='font-size:
+12.0pt;font-family:Consolas;color:#0000C0'>number</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exchangetTwoNumber(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>,
+currentPos, currentPos - 1);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exchangeLabel(currentPos,
+currentPos - 1);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>如果单击的按钮不位于最后一列，并且右列的对应按钮标题为空，交换按钮标题和对应的数值数组元素</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+(currentPos % </span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>number</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'> != </span><span lang=EN-US style='font-size:
+12.0pt;font-family:Consolas;color:#0000C0'>number</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'> - 1</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &amp;&amp;</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[currentPos
++ 1] == </span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>number</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'> * </span><span lang=EN-US style='font-size:
+12.0pt;font-family:Consolas;color:#0000C0'>number</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exchangetTwoNumber(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>,
+currentPos, currentPos + 1);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exchangeLabel(currentPos,
+currentPos + 1);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>如果数值数组移动成功，退出循环</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>boolean</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> flag = </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> i = 0; i
+&lt;</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>records</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>.</span><span lang=EN-US style='font-size:
+12.0pt;font-family:Consolas;color:#0000C0'>length</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>; i++) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>records</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>[i] != i +
+1) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; flag
+= </span><b><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#7F0055'>true</span></b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>break</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>如果移动成功，显示消息对话框</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (flag == </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>false</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>)</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JOptionPane.<i>showMessageDialog</i>(</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>null</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>, </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>&quot;</span><span
+style='font-size:12.0pt;font-family:Consolas;color:#2A00FF'>成功！<span
+lang=EN-US>&quot;</span></span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>该函数初始化用于检查是否移动成功的数值数组</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>privatevoid</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+initializeRandomNumber(</span><b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#7F0055'>int</span></b><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>[] records) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>生成<span lang=EN-US>0</span>到<span
+lang=EN-US>9</span>十个数值</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> i = 0; i
+&lt; records.</span><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#0000C0'>length</span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>; i++) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; records[i]
+= i + 1;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>随机选取两个数值数值元素，交换数值，总次数为<span
+lang=EN-US>100</span>次，产生混淆次序的效果</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>for</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> (</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> i = 0; i
+&lt; 100; i++) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> beginPos
+= (</span><b><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#7F0055'>int</span></b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>) (Math.<i>random</i>() * </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> * </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>int</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> endPos =
+(</span><b><span lang=EN-US style='font-size:12.0pt;font-family:Consolas;
+color:#7F0055'>int</span></b><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:black'>) (Math.<i>random</i>() * </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'> * </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>number</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>交换数值数组的两个元素值</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exchangetTwoNumber(records,
+beginPos, endPos);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt'><u><span style='font-size:16.0pt;
+font-family:宋体;color:black'>在控制面板类中添加</span></u></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>添加事件监听器</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jb1</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>.addActionListener(</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>this</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>jb2</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>.addActionListener(</span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>this</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>);</span></p>
+
+<p class=MsoNormal style='text-indent:32.0pt'><u><span style='font-size:16.0pt;
+font-family:宋体;color:black'>并添加</span></u></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>响应单击按钮</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>publicvoid</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+actionPerformed(ActionEvent e) {</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>处理“重来”</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>if</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+((JButton) e.getSource() == </span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#0000C0'>jb1</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>)</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#0000C0'>gp</span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>.initialize();</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>// </span><span
+style='font-size:12.0pt;font-family:Consolas;color:#3F7F5F'>处理“退出”</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:#7F0055'>elseif</span></b><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>
+((JButton) e.getSource() == </span><span lang=EN-US style='font-size:12.0pt;
+font-family:Consolas;color:#0000C0'>jb2</span><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>)</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;text-autospace:none'><span
+lang=EN-US style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.<i>exit</i>(0);</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:Consolas;color:black'>&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='text-indent:28.0pt'><span lang=EN-US
+style='font-size:14.0pt;font-family:Consolas;color:black;background:white'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>
