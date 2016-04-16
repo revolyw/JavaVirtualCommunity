@@ -16,7 +16,7 @@ html,body,form{width:100%;height:100%;}
 /**滚动条滑块**/
 ::-webkit-scrollbar-thumb {
     border-radius: 12px;
-    background: #009966; 
+    background: #ddd; 
     -webkit-box-shadow: inset 0 0 6px #d1cfcf; 
 }
 ::-webkit-scrollbar-thumb:window-inactive {
@@ -32,10 +32,23 @@ html,body,form{width:100%;height:100%;}
 #main{ min-height:500px; background-color:rgb(245,245,245); border:1px solid rgb(230,230,230);}
 @media (max-width:980px)
 {
-	#left_nav{ min-height:100%!important;}
+	#bg{ min-height:100%!important;}
 }
-#left_nav{ min-height:500px; background-color:#e8e8e8; color:#fff; border:1px solid rgb(230,230,230); border-width:5px;}
-#left_nav ul.father{ text-indent:1em; display:none;}
+#bg{ min-height:643px; background:url(../img/manage2.jpg) no-repeat; background-size:100% 100%; color:#fff;}
+#bg ul.father{ text-indent:1em; display:none;}
+
+#login{position:relative; top:150px; width:544px;height:264px; background:url(../img/mlogin.jpg) no-repeat;}
+#login .top_logo {position: relative; top: -100px; left: 50px; width: 80px; height: 80px; }
+#login .top_logo img {width: 100%; height: 100%; border: 1px solid #0B8A77!important; border-radius: 50px;}
+#login .login_title{position:relative; top:-170px; left:175px; color: #fff; font-family:Microsoft YaHei; font-size:20px; font-weight: bold;}
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px #fff inset; }
+#login input{outline: none;display:block; border:0; padding-left:5px; width:31%;}
+#login #ln{position:absolute; top:28%;left:52.3%;  }
+#login #pw{position:absolute; top:50%;left:52.3%;}
+#login #btnSubmit{position:absolute; top:72%;left:65%;display:block; color:#fff; font-weight:bold;}
+#login #btnSubmit:hover{ cursor:pointer; }
+/*页脚*/
+#footer{position: fixed; bottom: 30px; width: 1350px; color:#fff;}
 /*Excel表格*/
 #dataTable tr td{ text-align:center; font-weight:bold; font-family:Microsoft YaHei; font-size:18px; color:#009966;}
 

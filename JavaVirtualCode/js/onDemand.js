@@ -24,7 +24,8 @@ $(document).ready(function(e){
 
 function catalogue(json){
     i=0;
-    var rsString = "<ul class='nav sidenav nav-tabs nav-stacked'>";
+    var rsString ='';//<div class="top_img"></div>
+    rsString += "<ul class='nav sidenav nav-tabs nav-stacked'>";
     var tmp_num = 0;                
     for(i = 0;i<json.length;i++){
         var id = json[i].Id;
@@ -51,22 +52,32 @@ function catalogue(json){
     }
     rsString += "</ul>";
     $("#toc").html(rsString);
+    $(".top_img").css("background","url(img/top_wkdb.jpg) no-repeat");
+    $(".top_img").css("background-size","100% 100%");
     
-    //导航栏交互效果
-    $("#toc li").click(function(e){
-      $("#toc li").removeClass("active");
-      $(".father").each(function(){
-        $(this).css("display","none");
-      });
-      $(this).children("ul.nav").css("display","block");
-      $(this).addClass("active");
-      return true;
+    //左侧目录交互效果
+    $("#toc > ul > li > a").click(function(e){
+        e.stopPropagation();
+        var currentList = $(this).parent().children("ul.father");
+        if(currentList.css("display")=="block"){
+            currentList.slideUp();
+            return true;
+        }
+        $("#toc > ul > li").removeClass("active");
+        $(".father").each(function(){
+            $(this).slideUp();
+        });
+        currentList.slideToggle();
+        $(this).parent().addClass("active");
+        return true;
     });
     
     //加载教师列表
     $("li.toLink").click(function(){
           var link_url = $(this).children("div.hideData").html();
-          var video_object = "<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0' width='700' height='500'><param name='movie' value='Flvplayer.swf'><param name='quality' value='high'><param name='AutoStart' value='true'><param name='auto' value='true'><param name='allowFullScreen' value='true'><param name='FlashVars' value='vcastr_file=demo.flv&amp;LogoText=iopen.com.cn&amp;BufferTime=3'><embed id='video_object' src='resource/video/Flvplayer.swf' allowfullscreen='true' flashvars='vcastr_file="
+          var video_name = $(this).children("a").html();
+          var video_object = "<div class=\"dividing\"><h2><label class=\"skew\" id=\"\"><i>"+video_name+"</i></label></h2></div>";
+          video_object += "<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0' width='700' height='500'><param name='movie' value='Flvplayer.swf'><param name='quality' value='high'><param name='AutoStart' value='true'><param name='auto' value='true'><param name='allowFullScreen' value='true'><param name='FlashVars' value='vcastr_file=demo.flv&amp;LogoText=iopen.com.cn&amp;BufferTime=3'><embed id='video_object' src='resource/video/Flvplayer.swf' allowfullscreen='true' flashvars='vcastr_file="
           +link_url+"' quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' width='700' height='500'></object></br>"
           $("#video_object").html(video_object);
           $.ajax({              
@@ -79,7 +90,7 @@ function catalogue(json){
                 if(json==""||null==json||undefined==json){
                     return;
                 }
-                $("#video_object").append("<h5>与老师互动</h5>");
+                $("#video_object").append("<img style='width:30px; height:30px;' src='img/interact1.jpg' /><h5 style=\"display:inline-block; font-size:20px; color:#0F7463; font-family:'幼圆';\">与老师交流</h5>");
                 teacherList(json);
             },
             error: function(err) {     
@@ -99,7 +110,7 @@ function teacherList(json){
         var teacherName = json[i].Name;
         rsString += "<div class='docs-section'>"+
                         "<a class='tn' href='javascript:void(0);' id='"+id+"'><blockquote>"+
-                            "<p>"+teacherName+"</p>"+
+                            "<p style='font-size:15px;'>"+teacherName+"</p>"+
                         "</blockquote></a>"+
                         "<div class=\"messageSlideToggle\"><div class=\"messageSection\"></div>"+
                         "</div>"+
@@ -137,9 +148,10 @@ function refreshMessages(){
             var msgPageTool = new pageTool(json,pageSize,5);
             //初始化
             msgPageTool.init(messageSection,getOneDataHtml,initPerPageAction);
+            
             var teacherName = messageSection.closest(".messageSlideToggle").prev(".tn").find("p").html();
             var htmlStr = "<div class='msgDiv' style='color:#000;'>"+
-                      "<textarea  rows='9' style='width:100%;' placeholder='给 "+teacherName+" 留言'+></textarea>"+
+                      "<textarea  rows='4' style='width:100%;' placeholder='给 "+teacherName+" 留言'+></textarea>"+
                       "<a class='btn btn-info button'>提交</a>"+
                   "</div>";
             messageSection.next(".msgDiv").remove();

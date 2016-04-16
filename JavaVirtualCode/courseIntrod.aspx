@@ -68,17 +68,17 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li class=""><a href="home.aspx">首页</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class="active"><a href="courseIntrod.aspx">课程概述</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="knowledge.aspx">知识管理</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="onDemand.aspx">微课点播</a></li>
-                                <li class="span">&nbsp;|</li>
-                                <li class=""><a href="practiceTeaching.aspx">实验教学</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="evaluation.aspx">学习评价</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
+                                <li class=""><a href="practiceTeaching.aspx">实例教学</a></li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="community.aspx" target="_blank">社区交流</a></li>
                             </ul>
                         </div>
@@ -90,11 +90,20 @@
     <!-- 页面主体部分  -->
     <div id="wrap">
         <div class="container bodySize">
-            <div class="row">
+            <div id="nav_position">
+                <img src="img/icon1.png" style="padding:0 0 5px 5px;"/>
+                <ul class="breadcrumb">
+                    <li>您的位置：</li>
+                    <li><a href="home.aspx">首页</a> </li>
+                    <li><a href="courseIntrod.aspx" class="active">课程概述</a> </li>
+                </ul>
+            </div>
+            <div class="row">    
                 <div id="catalogue_frame"></div>
                 <div class="col-md-3" >
                     <div class="sidebar ">
                         <div id="toc">
+                            <!--<div class="top_img"></div>-->
                             <ul class="nav sidenav nav-tabs nav-stacked">
                                 <li class="active"><a href="#knowledgeMap">知识地图</a></li>
                                 <li class=""><a href="#know-java">了解Java</a></li>
@@ -108,10 +117,11 @@
                 <!--内容展示-->
                 <div class="col-md-9" role="main">
                     <div id="content_frame" class="col-md-9" role="main">
+                        <!--
                         <ul class="breadcrumb">
                             <li><a href="home.aspx">首页</a> </li>
                             <li><a href="courseIntrod.aspx" class="active">课程概述</a> </li>
-                        </ul>
+                        </ul>-->
                         <div class="dividing">
                             <h2>
                                 <label class="skew" id="knowledgeMap">
@@ -127,8 +137,8 @@
                         </div>
                         <div class="docs-section">
                             <span style="font-size:13px">Java 是几乎所有类型的网络应用程序的基础，也是开发和提供嵌入式和移动应用程序、游戏、基于 Web 的内容和企业软件的全球标准。Java 在全球各地有超过900万的开发人员，使您能够高效地开发、部署和使用精彩的应用程序和服务。从笔记本电脑到数据中心，从游戏控制台到科学超级计算机，从手机到互联网，Java 无处不在！</span>
-                            <pre>
-<img alt="Java 徽标" class="logo-pic" src="img/javalogo-81x162.png">
+                            <pre style="word-break: break-word;
+    white-space: normal;">
 97%的企业桌面运行Java美国有89%的桌面（或计算机）运行Java全球有 900 万 Java 开发人员 开发人员的头号选择 排名第一的部署平台有30亿部移动电话运行Java100%的蓝光盘播放器附带了Java有50亿张Java卡在使用1.25亿台TV设备运行Java前5个原始设备制造商均提供了JavaME
                                        </pre>
                             <div style="clear: both">

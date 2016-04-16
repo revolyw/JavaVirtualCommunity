@@ -16,11 +16,9 @@ $(document).ready(function(){
         '<div class="modal-dialog">'+
             '<div class="modal-content">'+
                 '<div class="modal-header">'+
-                    '<h4 class="modal-title">'+
-                        '登录'+
-                        '<button type="button" class="close text-right" aria-hidden="true" data-dismiss="modal">'+
-                            '&times;</button>'+
-                    '</h4>'+
+                '<img src="img/login4.png" style="width:30px;height:30px; margin-right:20px" />'+
+				'<img src="img/login1.jpg" />'+
+                '<button type="button" class="close text-right" aria-hidden="true" data-dismiss="modal">&times;</button>'+
                 '</div>'+
                 '<div class="modal-body">'+
                     '<iframe class="sign-frame" src="login.aspx" frameborder="0"></iframe>'+
@@ -37,11 +35,9 @@ $(document).ready(function(){
         '<div class="modal-dialog">'+
             '<div class="modal-content">'+
                 '<div class="modal-header">'+
-                    '<h4 class="modal-title">'+
-                        '注册'+
-                        '<button type="button" class="close text-right" aria-hidden="true" data-dismiss="modal">'+
-                            '&times;</button>'+
-                    '</h4>'+
+                '<img src="img/login4.png" style="width:30px;height:30px; margin-right:20px" />'+
+				'<img src="img/register1.png" />'+
+                '<button type="button" class="close text-right" aria-hidden="true" data-dismiss="modal">&times;</button>'+
                 '</div>'+
                 '<div class="modal-body">'+
                     '<iframe class="sign-frame" src="reg.aspx" frameborder="0"></iframe>'+
@@ -55,4 +51,5 @@ $(document).ready(function(){
     '</div>';
     
     $("form:first").prepend(modalStr);
+    
 });

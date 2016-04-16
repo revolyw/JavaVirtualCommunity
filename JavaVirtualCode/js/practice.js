@@ -42,14 +42,14 @@ function getOnePagePrc(Data){
     return htmlStr;
 }
 //初始化每页的交互效果及操作
-function initPerPgAction(pgTool){
+function initPerPgAction(pgTool){/*换成css控制
     var pgAreaObj = pgTool.pagingAreaDomObj;
     pgAreaObj.find("#big_ulist li").mouseover(function(){
-        $(this).css("background","url(img/practice/_bigbg.gif) no-repeat");
+        $(this).css("background","#6CD9AA");
         $(this).css("color","#fff");
     });
     pgAreaObj.find("#big_ulist li").mouseout(function(){
-        $(this).css("background","url(img/practice/bigbg.gif) no-repeat");
-        $(this).css("color","#333");
-    });
+        $(this).css("background","#fff");
+        $(this).css("color","#09935F");
+    });*/
 }

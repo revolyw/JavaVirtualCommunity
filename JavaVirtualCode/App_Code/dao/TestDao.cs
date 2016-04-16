@@ -30,7 +30,7 @@ public class TestDao
     {
         //取得数据库连接
         OdbcConnection conn = DBConnection.getInstance();
-        string sql = "select * from questionCatalogue";
+        string sql = "select * from questioncatalogue";
         OdbcCommand obcm = new OdbcCommand(sql, conn);
         OdbcDataReader rs = obcm.ExecuteReader();
 
@@ -49,7 +49,7 @@ public class TestDao
         List<OdbcDataReader> list = new List<OdbcDataReader>();
 
         OdbcConnection conn = DBConnection.getInstance();
-        string sql = "select * from mcquestion where id in ( select qid from relationshipforquestion where qtype='xuanze' and sectionId = '"+sectionId+"')";
+        string sql = "select * from mcquestion where id in ( select qid from relationshipforquestion where qtype='xuanze' and sectionId = '"+ sectionId +"')";
         OdbcCommand obcm = new OdbcCommand(sql, conn);
         OdbcDataReader rs = obcm.ExecuteReader();
         list.Add(rs);

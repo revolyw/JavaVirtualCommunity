@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/public.css" />
     <link rel="stylesheet" href="css/knowledge.css" />
 
-    <script src="dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="dist/js/bootstrap.min.js"></script>
 <!--钉住导航-->
     <%--<script src="js/stickUp.min.js"></script>--%>
 
@@ -69,17 +69,17 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li class=""><a href="home.aspx">首页</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="courseIntrod.aspx">课程概述</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class="active"><a href="knowledge.aspx">知识管理</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="onDemand.aspx">微课点播</a></li>
-                                <li class="span">&nbsp;|</li>
-                                <li class=""><a href="practiceTeaching.aspx">实验教学</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="evaluation.aspx">学习评价</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
+                                <li class=""><a href="practiceTeaching.aspx">实例教学</a></li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="community.aspx" target="_blank">社区交流</a></li>
                             </ul>
                         </div>
@@ -91,6 +91,14 @@
     <!-- 页面主体部分  -->
     <div id="wrap">
         <div class="container bodySize">
+            <div id="nav_position">
+                <img src="img/icon1.png" style="padding:0 0 5px 5px;"/>
+                <ul class="breadcrumb">
+                    <li>您的位置：</li>
+                    <li><a href="home.aspx">首页</a> </li>
+                    <li><a href="knowledge.aspx" class="active">知识管理</a> </li>
+                </ul>
+            </div>
             <div class="row">
                 <div id="catalogue_frame"></div>
                 <div class="col-md-3">
@@ -120,8 +128,11 @@
                 </div>
                 <!--内容展示-->
                 <div class="col-md-9" role="main">
-                    <div id="content_frame" class="col-md-9" role="main">
-                        <img src="img/loading1.gif" />
+                    <div style="width:100%; min-height:100%;border:1px solid #e8e8e8;padding:3px; box-shadow:-2px 2px 3px #aaa;" class="col-md-9" role="main">
+                        <div id="dividing"></div>
+                        <div id="content_frame">
+                            <img src="img/loading1.gif" />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -47,10 +47,11 @@
     <div class="btn btn-primary scrollToTop">
         回顶</div>
     <div class="opacity">
+        <div class="decorate_left_top"></div>
         <div class="view_tiezi displayNone">
         </div>
     </div>
-    <!--页头logo-->
+    <!--页头logo--><!--
     <div class="container bodySize">
         <div class="demo-headline header">
             <asp:Label ID="display_lg_off" class="show-off" runat="server">
@@ -75,6 +76,7 @@
             </asp:Label>
         </div>
         <!--导航-->
+        <!--
         <div class="navbar-inverse">
             <div class="navwrapper navbar-static-top">
                 <div class="navbar navbar-inverse">
@@ -100,24 +102,27 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <!-- 页面主体部分  -->
     <div id="wrap">
-        <div class="container bodySize">
+        
+        <div class="bg container bodySize">
+            <div class="top_bg"></div>
             <div id="top" class="col-md-12">
-                <div class="community_top_bkg"><img src="img/community_top.jpg" /></div>
+                <!--<div class="community_top_bkg"><img src="img/community_top.jpg" /></div>-->
                 <ul>
                     <li id="nav_kantie" class="active">看帖</li>
                     <li id="nav_fatie">发帖</li>
                     <li id="nav_dongtai">动态</li>
                 </ul>
                 <div id="search">
-                    <input type="text" placeholder="帖子搜索" />
+                    <input id="input_search" type="text" placeholder="帖子搜索" />
                     <a href="javascript:void(0);" class="search_img"></a>
                 </div>
-                <div id="top_right">
-                    <img src="img/communityLogo.png" style="border:1px solid #e8e8e8;" />
+                <div class="top_logo">
+                    <a href="home.aspx"><img src="img/communityLogo.png" style="border:1px solid #e8e8e8;" /></a>
                 </div>
+                <div class="top_btn"><a href="home.aspx">去社区学习</a></div>
             </div>
             <div id="bottom" class="col-md-12">
                 <ul>

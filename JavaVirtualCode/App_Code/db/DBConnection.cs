@@ -17,7 +17,7 @@ using System.Data.Odbc;
 public class DBConnection
 {
     //使用Connector/ODBC连接到MySQL
-    private static OdbcConnection conn = new OdbcConnection("Dsn=mysql_for_javavirtual"); 
+    private static OdbcConnection conn = new OdbcConnection("Dsn=mysql"); 
 	private DBConnection()
 	{
 		//

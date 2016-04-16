@@ -68,17 +68,17 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li class=""><a href="home.aspx">首页</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="courseIntrod.aspx">课程概述</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="knowledge.aspx">知识管理</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="onDemand.aspx">微课点播</a></li>
-                                <li class="span">&nbsp;|</li>
-                                <li class="active"><a href="practiceTeaching.aspx">实验教学</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="evaluation.aspx">学习评价</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
+                                <li class="active"><a href="practiceTeaching.aspx">实例教学</a></li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="community.aspx" target="_blank">社区交流</a></li>
                             </ul>
                         </div>
@@ -90,6 +90,14 @@
     <!-- 页面主体部分  -->
     <div id="wrap">
         <div class="container bodySize">
+            <div id="nav_position" style="margin-bottom:0;border-bottom:1px solid #eee;">
+                <img src="img/icon1.png" style="padding:0 0 5px 5px;"/>
+                <ul class="breadcrumb" style="display:inline; padding:0; background:#f5f5f5;">
+                    <li>您的位置：</li>
+                    <li><a href="home.aspx">首页</a> </li>
+                    <li><a href="practiceTeaching.aspx" class="active">实例教学</a> </li>
+                </ul>
+            </div>
             <div class="row container">
                 <div id="LastContent1">
                     <ul id="big_ulist">

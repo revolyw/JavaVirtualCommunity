@@ -5,12 +5,14 @@ body {
   padding-bottom: 40px;
   background-color: #eee;
 }
-
+/*input背景色*/
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px #fff inset; }
 .form-signin {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
 }
+input:-webkit-autofill:focus{-webkit-box-shadow: 0 0 0px 1000px #fff inset;}
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;

@@ -13,11 +13,7 @@ ul
 	width:100%
 }
 
-/*面包屑及sknw*/
-.dividing { height: 17px; margin: 25px 0 45px; border-bottom: 1px solid #D8D8D8; text-align: center;}
-.dividing h2 { margin:0px; display: inline-block; padding: 0 30px; font-size: 22px; background: #FFF;}
-.skew{background-color: #0F7463; display: inline-block;transform: skew(-20deg);-webkit-transform: skew(-20deg);-moz-transform: skew(-20deg);  padding: 2px 30px;  color: #FFF;}
-label.skew i{  display: inline-block;  transform: skew(20deg);  -webkit-transform: skew(20deg);  -moz-transform: skew(20deg);  font-style: normal;}
+
 
 .question_title{border-left: 3px solid #0F7463;	font-style:italic;	font-size:20px;}
 #content

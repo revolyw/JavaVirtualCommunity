@@ -37,7 +37,12 @@
     
     //发帖模块
     $("#nav_fatie").click(function(){
-        var htmlStr = "<div class=\"div_fatie\"><input id=\"fatie_title\" type=\"text\" placeholder=\"标题\" /><textarea id=\"fatie_content\" rows=\"20\" placeholder=\"帖子内容\" ></textarea><div id=\"btn_fatie\" class=\"btn btn-primary\">发帖</div></div>";
+        var htmlStr  = "<div class=\"div_fatie\">";
+        htmlStr     +=  "<h1>发帖</h1>";
+        htmlStr     +=  "<input id=\"fatie_title\" type=\"text\" placeholder=\"标题\" />";
+        htmlStr     +=  "<textarea id=\"fatie_content\" rows=\"10\" placeholder=\"帖子内容\" ></textarea>";
+        htmlStr     +=  "<div id=\"btn_fatie\" class=\"btn btn-primary\">发帖</div>";
+        htmlStr     += "</div>";
         $("#bottom").html(htmlStr);
         $("#btn_fatie").click(function(){
             var title = $("#fatie_title").val();
@@ -141,7 +146,8 @@ function LinkToDiezi(currentTieziId){
         success: function(data) {    
             var json = eval("("+data.d+")"); //json[0] 一个帖子对象 json[1]留言分页数据
             
-            var htmlStr = "<ul>";
+            var htmlStr = "";
+            htmlStr += "<ul>";
             htmlStr += "<li class=\"view_tiezi_head\"><span class=\"view_tiezi_head_title\" theme_id=\""+json[0].Id+"\">"+json[0].Title+"</span><div class=\"close\"></div></li>";
             htmlStr += "<li><div class=\"view_tiezi_content\">"+json[0].Content+"</div><a><img src=\"img/big_touxiang.jpg\"/><span class=\"view_tiezi_uname\">"+json[0].Uname+"</span></a><div class=\"view_tiezi_contentBottom\"><span class=\"view_tiezi_loushu\">1楼</span><span class=\"view_tiezi_time\">"+json[0].Time+"</span></li>";
             htmlStr += "</ul>";
@@ -219,7 +225,7 @@ function getOnePageComments(Data){
         htmlStr +=      "<div style=\"display:none\" class=\"replys\">";
         htmlStr +=      "</div>";
         htmlStr +=  "</div>";
-        htmlStr +=  "<div class=\"div_reply\" style=\"display:none\"><textarea style=\"width:100%;height:100px;\" to=\""+Data[i][1].U_id+"\" placeholder=\"回复 "+Data[i][0]+"\"></textarea><div class=\"btn btn-info btn_reply\" style=\"width:100%\">回复</div></div>";
+        htmlStr +=  "<div class=\"div_reply\" style=\"display:none\"><textarea style=\"width:100%;height:80px;\" to=\""+Data[i][1].U_id+"\" placeholder=\"回复 "+Data[i][0]+"\"></textarea><div class=\"btn btn-info btn_reply\" style=\"width:100%\">回复</div></div>";
         htmlStr += "</li>";
     }
     htmlStr += "</ul>";

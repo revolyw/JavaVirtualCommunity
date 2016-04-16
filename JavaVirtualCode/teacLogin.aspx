@@ -17,25 +17,34 @@
     <form id="form1" runat="server">
     <div id="container" class="container">
         <div class="row">
+            <!--
             <div class="container" style="width: 100%; padding: 0;">
                 <div class="row head">
                     <img src="img/javaVirtual_head1.fw.png" class="bg_img img-responsive" />
                 </div>
             </div>
+            -->
+            
             <div class="container" style="width: 100%">
                 <div class="row">
-                    <div id="left_nav" class="col-md-12">
+                    <div id="bg" class="col-md-12">
                         <div class="container">
                             <div class="row">
                                 </br>
                                 </br>
-                                <div class="col-md-offset-4 col-md-4">
-                                    <h2 style="color: #009966; text-align: center; font-weight: bold;">
-                                        教师登录</h2>
-                                    </br>
-                                    <input id='ln' type='text' class='input_text form-control' placeholder="帐号" />
-                                    <input id='pw' type='passWord' class='input_text form-control' placeholder="密码" /></br>
-                                    <a id='btnSubmit' class="btn btn-lg btn-primary btn-block">登陆</a>
+                                <div class="col-md-offset-3 col-md-3">
+                                    <div id="login">
+                                        <div class="top_logo">
+                                            <img src="img/communityLogo.png" style="border:1px solid #e8e8e8;"></a>
+                                        </div>
+                                        <h2 class="login_title">
+                                        虚拟学习社——后台管理系统</h2>
+                                        <div style="position:absolute;top:28%; left:45%; color:#000;">账户</div>
+                                        <div style="position:absolute;top:50%; left:45%; color:#000;">密码</div>
+                                        <input id='ln' type='text' placeholder="帐号" />
+                                        <input id='pw' type='passWord' placeholder="密码" />
+                                        <a id='btnSubmit'>登陆</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +61,7 @@
 
     <script>
         var footerStr = "<label style=\"width:100%; margin:0px; text-align:center; display:block;\">Copyright © 2014 njujlxy & Optimize For Web Page By Bootstrap</label>"+
-        "<a style=\"width:100%; text-align:center; font-size:12px; height:18px; float:left;\" href=\"home.aspx\">学生界面</a>";
+        "<a style=\"width:100%; text-align:center; color:#fff; font-size:12px; height:18px; float:left;\" href=\"home.aspx\">学生界面</a>";
         $("#footer .container").html(footerStr);
     </script>
 

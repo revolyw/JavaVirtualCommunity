@@ -15,7 +15,8 @@ $(document).ready(function(e){
     });
     function catalogue(json){   
         i=0;
-        var rsString = "<ul class='nav sidenav nav-tabs nav-stacked'>";
+        var rsString ='';//<div class="top_img"></div>
+        rsString += "<ul class='nav sidenav nav-tabs nav-stacked'>";
         var tmp_num = 0;                
         for(i = 0;i<json.length;i++){
             var id = json[i].Id;
@@ -24,7 +25,9 @@ $(document).ready(function(e){
             rsString += "<li class=''><a id='#"+id+"'href='javascript:void(0);'>第<span id=\"sectionId\">"+sectionId+"</span>章 <span id=\"sectionTitle\">"+sectionTitle+"</span></a></li>";
         }
         $("#toc").html(rsString);
-        
+        $(".top_img").css("background","url(img/top_xxpj.jpg) no-repeat");
+        $(".top_img").css("background-size","100% 100%");
+    
         //目录交互效果
         $("ul.sidenav li").click(function(){
             $("#toc li").each(function(){
@@ -63,19 +66,17 @@ $(document).ready(function(e){
     
     
     function content_frame_init(secId,secTitle){
-        var initStr = "<ul class=\"breadcrumb\">"+
-                        "<li><a href=\"home.aspx\">首页</a> </li>"+
-                        "<li><a href=\"evaluation.aspx\">学习评价</a> </li>"+
-                        "<li class=\"active\">第"+secId+"章 "+secTitle+"</li>"+
-                      "</ul>"+
-                      "<div class=\"dividing\">"+
-                        "<h2>"+
-                            "<label class=\"skew\">"+
-                                "<i>第"+secId+"章 "+secTitle+"</i></label></h2>"+
-                        "</div>"+
-                      "<div id=\"content\"></div>";
+        var initStr = "<li><a href=\"home.aspx\">首页</a> </li>"+
+                      "<li><a href=\"evaluation.aspx\">学习评价</a> </li>"+
+                      "<li class=\"active\">第"+secId+"章 "+secTitle+"</li>";
+        $(".breadcrumb").html(initStr);
+        initStr = "<div class=\"dividing\">"+
+                    "<h2>"+
+                        "<label class=\"skew\">"+
+                        "<i>第"+secId+"章 "+secTitle+"</i></label></h2>"+
+                  "</div>"+
+                  "<div id=\"content\"></div>";
         $("#content_frame").html(initStr);
-        
     }
     //选择题
     function xuanze(rs){

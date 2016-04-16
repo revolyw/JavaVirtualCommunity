@@ -47,7 +47,7 @@ public partial class reg : System.Web.UI.Page
 
         int rsCode = 0;
         if(checkFlag == true){
-            rsCode = UserDao.getInstance().addStudent(ln_s, pw_s, no_s, "", name_s, "", "", "", "", "", "", "", "", "", "", "", "");
+            rsCode = UserDao.getInstance().addStudent(ln_s, pw_s, no_s, "student", name_s, "", "", "", "", "", "", "", "", "", "-1", "", "");
         }
 
         if (rsCode == 1)

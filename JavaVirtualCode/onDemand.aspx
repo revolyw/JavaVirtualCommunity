@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/public.css" />
     <link rel="stylesheet" href="css/onDemand.css" />
 
-    <script src="dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="dist/js/bootstrap.min.js"></script>
 
     <!--
 <script src="js/stickUp.min.js"></script><!--钉住导航-->
@@ -70,17 +70,17 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li class=""><a href="home.aspx">首页</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="courseIntrod.aspx">课程概述</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="knowledge.aspx">知识管理</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class="active"><a href="onDemand.aspx">微课点播</a></li>
-                                <li class="span">&nbsp;|</li>
-                                <li class=""><a href="practiceTeaching.aspx">实验教学</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="evaluation.aspx">学习评价</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;&nbsp;</li>
+                                <li class=""><a href="practiceTeaching.aspx">实例教学</a></li>
+                                <li class="span">&nbsp;&nbsp;</li>
                                 <li class=""><a href="community.aspx" target="_blank">社区交流</a></li>
                             </ul>
                         </div>
@@ -92,6 +92,14 @@
     <!-- 页面主体部分  -->
     <div id="wrap">
         <div class="container bodySize">
+            <div id="nav_position">
+                <img src="img/icon1.png" style="padding:0 0 5px 5px;"/>
+                <ul class="breadcrumb">
+                    <li>您的位置：</li>
+                    <li><a href="home.aspx">首页</a> </li>
+                    <li><a href="courseIntrod.aspx" class="active">微课点播</a> </li>
+                </ul>
+            </div>
             <div class="row">
                 <div id="catalogue_frame">
                 </div>
@@ -132,7 +140,7 @@
                                 <param name="auto" value="true" />
                                 <param name="allowFullScreen" value="true" />
                                 <param name="FlashVars" value="vcastr_file=demo.flv&LogoText=iopen.com.cn&BufferTime=3" />
-                                <embed src="resource/video/Flvplayer.swf" allowfullscreen="true" flashvars="vcastr_file=example_1.flv"
+                                <embed src="resource/video/Flvplayer.swf" allowfullscreen="true" flashvars="vcastr_file=video_1_1.mp4"
                                     quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"
                                     width="700" height="500"></embed>
                             </object>

@@ -63,8 +63,8 @@ public class UserDao
     public int addStudent(string ln, string pw, string no, string role, string name, string sex, string cls, string birthday, string introduce, string phone, string email, string grp, string learn_level, string power, string is_used, string reg_date, string pass_date)
     {
         OdbcConnection conn = DBConnection.getInstance();
-        string sql = "insert into students (ln,pw,no,role,name,sex,cls,birthday,introduce,phone,email,grp,learn_level,power,is_used,reg_date,pass_date) values('"+ln+"','"+pw+"','"+no+"','"+role+"','"+name+"','"+sex+"','"+cls+"','"+birthday+"','"+introduce+"','"+phone+"','"+
-email+"','"+grp+"','"+learn_level+"','"+power+"','"+is_used+"','"+reg_date+"','"+pass_date+"')";
+        string sql = "insert into students (ln,pw,no,role,name,sex,cls,birthday,introduce,phone,email,grp,learn_level,power,is_used) values('"+ln+"','"+pw+"','"+no+"','"+role+"','"+name+"','"+sex+"','"+cls+"','"+birthday+"','"+introduce+"','"+phone+"','"+
+email+"','"+grp+"','"+learn_level+"','"+power+"','"+is_used+"')";
         OdbcCommand obcm = new OdbcCommand(sql, conn);
         int rs = obcm.ExecuteNonQuery();
 

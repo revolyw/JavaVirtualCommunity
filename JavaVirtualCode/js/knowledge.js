@@ -79,7 +79,8 @@ function catalogue(json){
 //    }
     
     i=0;
-    var rsString = "<ul class='nav sidenav sidenav nav-tabs nav-stacked'>";
+    var rsString ='';//<div class="top_img"></div>
+    rsString += "<ul class='nav sidenav sidenav nav-tabs nav-stacked'>";
     var tmp_num = 0;                
     for(i = 0;i<json.length;i++){
         var id = json[i].Id;
@@ -105,25 +106,36 @@ function catalogue(json){
     }
     rsString += "</ul>";
     $("#toc").html(rsString);
-    
+    $(".top_img").css("background","url(img/top_zsgl.jpg) no-repeat");
+    $(".top_img").css("background-size","100% 100%");
+   
     //左侧目录交互效果
-    $("#toc li").click(function(e){
-      $("#toc li").removeClass("active");
-      $(".father").each(function(){
-        $(this).css("display","none");
-      });
-      $(this).children("ul.nav").css("display","block");
-      $(this).addClass("active");
-      return true;
+    $("#toc > ul > li > a").click(function(e){
+        e.stopPropagation();
+        var currentList = $(this).parent().children("ul.father");
+        if(currentList.css("display")=="block"){
+            currentList.slideUp();
+            return true;
+        }
+        $("#toc > ul > li").removeClass("active");
+        $(".father").each(function(){
+            $(this).slideUp();
+        });
+        currentList.slideToggle();
+        $(this).parent().addClass("active");
+        return true;
     });
     
     $("li.toLink").click(function(){
-        var string=$(this).children("div.hidenData").html();
+        var contentId=$(this).children("div.hidenData").html();
+        var cardName = $(this).children("a").html();
+        var dividing = "<div class=\"dividing\"><h2><label class=\"skew\"><i>"+cardName+"</i></label></h2></div>";
+        $("#dividing").html(dividing);
         $.ajax({              
             type: "post",            
             url: "knowledge.aspx/getKnowledgeContent",
             contentType: "application/json; charset=utf-8",
-            data:'{"contentId":"'+string+'"}',
+            data:'{"contentId":"'+contentId+'"}',
             dataType: "json",     
             success: function(data) {    //待改进，一次数据量太大
                 var json = eval("("+data.d+")"); //将json字符串转换成json对象

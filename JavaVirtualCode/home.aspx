@@ -59,6 +59,7 @@
 		                    <li><a data-toggle="modal" data-target="#LoginModal" href="#">
 			                	登录
 		                        </a></li>
+		                    <li>|</li>
 	                    	<li><a data-toggle="modal" data-target="#RegModal" href="#">
 			                	注册
 		                        </a></li>
@@ -83,17 +84,17 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="home.aspx">首页</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;</li>
                                 <li class=""><a href="courseIntrod.aspx">课程概述</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;</li>
                                 <li class=""><a href="knowledge.aspx">知识管理</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;</li>
                                 <li class=""><a href="onDemand.aspx">微课点播</a></li>
-                                <li class="span">&nbsp;|</li>
-                                <li class=""><a href="practiceTeaching.aspx">实验教学</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;</li>
                                 <li class=""><a href="evaluation.aspx">学习评价</a></li>
-                                <li class="span">&nbsp;|</li>
+                                <li class="span">&nbsp;</li>
+                                <li class=""><a href="practiceTeaching.aspx">实例教学</a></li>
+                                <li class="span">&nbsp;</li>
                                 <li class=""><a href="community.aspx" target="_blank">社区交流</a></li>
                             </ul>
                         </div>
@@ -106,20 +107,19 @@
     <div id="wrap">
         <div class="container bodySize">
             <div class="row">
-                <div class="one floatLeft blockBorder col-md-8">
+                <div class="one floatLeft col-md-8">
                     <div class="banner1">
                         <ul>
                             <li>
-                                <img alt="bannerImg" src="img/homeBigPic/big1.jpg" /></li>
+                                <img alt="bannerImg" src="img/homeBigPic/mainPic1.jpg" /></li>
                             <li>
-                                <img alt="bannerImg" src="img/homeBigPic/big2.jpg" /></li>
-                            <li>
-                                <img alt="bannerImg" src="img/homeBigPic/big3.jpg" /></li>
+                                <img alt="bannerImg" src="img/homeBigPic/mainPic2.jpg" /></li>
                         </ul>
                     </div>
                     <a href="javascript:void(0);" class="unslider-arrow1 prev"></a> <a href="javascript:void(0);"
                         class="unslider-arrow1 next"></a>
                 </div>
+                <!-- 书轮播
                 <div class="two floatLeft blockBorder col-md-4">
                     <div class="banner2">
                         <ul>
@@ -137,6 +137,19 @@
                     </div>
                     <a href="javascript:void(0);" class="unslider-arrow2 prev"></a> <a href="javascript:void(0);"
                         class="unslider-arrow2 next"></a>
+                </div> !-->
+                <div class="aboutJava floatLeft panel panel-default col-md-4">
+                    <div class="text">
+                         Java 语言诞生于1995年，Java的名字来源于印度尼西亚爪哇岛的英文名称，因盛产咖啡而闻名，Java的标志正是一杯冒着热气的咖啡。Java是一种可以撰写跨平台应用软件的面向对象的程序设计语言，也是目前编程的主流语言。
+                    </div>
+                    <a class="more" href="courseIntrod.aspx"><img src="img/little2.jpg"/></a>
+                </div>
+                <div class="communityMessage floatLeft panel panel-default col-md-4">
+                    <a class="cmsg_1" href="onDemand.aspx">【视频】最新视频上线，可以点播</a>
+                    <a class="cmsg_2" href="onDemand.aspx">【通知】交流社区开通，欢迎大家参与交流分享</a>
+                    <a class="cmsg_3" href="onDemand.aspx">【案例】最新程序设计案例：计算器</a>
+                    <a class="cmsg_4" href="onDemand.aspx">【通知】学习评价系统，可以在线测验，欢迎点击测试</a>
+                    <a class="more" href="community.aspx"><img src="img/little2.jpg"/></a>
                 </div>
                 <div class="three floatLeft panel panel-default col-md-4">
                      <div class="panel-heading">
@@ -144,23 +157,17 @@
                             导学频道</h3>
                     </div>
                     <div class="panel-body">
-                        <p>
-                            <strong>Java起源</strong></p>
-                            Java自1995诞生，至今已经16年历史。Java的名字的来源：Java是印度尼西亚爪哇岛的英文名称，因盛产咖啡而闻名。Java语言中的许多库类名称，多与咖啡有关，如JavaBeans(咖啡豆)、NetBeans(网络豆)以及ObjectBeans
-                            (对象豆)等等。SUN和JAVA的标识也正是一杯正冒着热气的咖啡。
-                    </div>
+                          Java程序设计是计算机专业学生的必修科目，也是学习后续课程的基础。开发本学习社区的初衷正是为了更好地帮助学习者完成Java课程的学习任务。在本社区,同学们可以完成相应知识点的预习、复习；可以反复观看微课点播模块的教学视频，对于不懂的内容，可以在相应的模块下提问，会得到任课教师的解答；还可以在学习评价模块对自己学习效果进行检测；在社区交流模块，还为所有学习者提供了交流讨论的空间。
+                          </div>
                     <div class="panel-footer"><a href="courseIntrod.aspx">查看更多</a></div>
                 </div>
                 <div class="four floatLeft panel panel-default col-md-4">
                    <div class="panel-heading">
                         <h3 class="panel-title">
-                            每周一题</h3>
+                            案例精选</h3>
                     </div>
                     <div class="panel-body">
-                        <p>
-                            <strong>汉诺塔</strong></p>
-                            汉诺塔：汉诺塔（又称河内塔）问题是源于印度一个古老传说的益智玩具。大梵天创造世界的时候做了三根金刚石柱子，在一根柱子上从下往上按照大小顺序摞着64片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上。并且规定，在小圆盘上不能放大圆盘，在三根柱子之间一次只能移动一个圆盘。
-                            试用Java编写算法解决该问题
+                       贪吃蛇是一款非常经典的小游戏，玩过贪吃蛇游戏的朋友一定不会陌生了，这款游戏既简单又耐玩。通过控制蛇头方向，尽可能多的吃到东西，每吃一口就能得到一定的积分，使得蛇变长，身子越长玩的难度就越大，不能碰墙，不能咬到自己的身体，更不能咬自己的尾巴，等到了一定的分数，就能过关，然后继续玩下一关。在学习完Java后，我们也可以开发出这样有趣的游戏噢。喜欢贪吃蛇小游戏的朋友们，快来挑战一下吧!
                     </div>
                     <div class="panel-footer"><a href="practiceTeaching.aspx">查看更多</a></div>
                 </div>
@@ -170,14 +177,18 @@
                             资源下载</h3>
                     </div>
                     <div class="panel-body">
-                         <p>
-                            <strong>点击下载</strong></p>
                         <ul>
+                          <li><a href="http://docs.oracle.com/javase/7/docs/" target="_blank">JDK 7.0</a></li>
                           <li><a href="http://www.oracle.com/technetwork/cn/java/javase/documentation/api-jsp-136079-zhs.html" target="_blank">Java SE API 中文文档</a></li>
                           <li><a href="http://www.oracle.com/technetwork/cn/java/javaee/overview/index.html" target="_blank">Java2EE API 中文文档</a></li>
+                          <li><a href="http://www.eclipse.org/downloads/" target="_blank">Eclipse (Java ADT)</a></li>
+                          <li><a href="http://maven.apache.org/download.cgi" target="_blank">Maven</a></li>
+                          <li><a href="http://www.mysql.com/downloads/" target="_blank">MySql Database</a></li>
+                          <li><a href="https://www.oracle.com/downloads/index.html" target="_blank">Oracle Database</a></li>
+                          <li><a href="http://msdn.itellyou.cn/" target="_blank">各类开发人员工具</a></li>
                         </ul>
                     </div>
-                    <div class="panel-footer"><a href="practiceTeaching.aspx">查看更多</a></div>
+                    <div class="panel-footer"><a href="http://www.oracle.com/technetwork/cn/java/javase/documentation/index.html" target="_blank">查看更多</a></div>
                 </div>
             </div>
         </div>
