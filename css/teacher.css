@@ -1,0 +1,88 @@
+﻿*{ margin:0; padding:0;}
+html,body,form{width:100%;height:100%;}
+@media (max-width:992px)
+{
+	*{ font-size:14px;}
+}
+/**设置滚动条的样式**/
+::-webkit-scrollbar {
+    width: 10px;
+}
+/**滚动槽**/
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px #d1cfcf; 
+    border-radius: 10px;
+}
+/**滚动条滑块**/
+::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    background: #ddd; 
+    -webkit-box-shadow: inset 0 0 6px #d1cfcf; 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(245,245,245,0.4); 
+}
+
+.head{width: 100%; min-height:120px; position:relative; margin:0;}
+.head .bg_img { position:absolute; left:0px; top:0px; width:100%; height:100%;}
+.head .btn-group{ position:absolute; bottom:0px; z-index:1000; padding:0px;}
+.head button{ border-radius:0!important; color:#009966;}
+#container{ width:100%; min-height:500px;}
+#title{ width:100%;}
+#main{ min-height:500px; background-color:rgb(245,245,245); border:1px solid rgb(230,230,230);}
+@media (max-width:980px)
+{
+	#bg{ min-height:100%!important;}
+}
+#bg{ min-height:643px; background:url(../img/manage2.jpg) no-repeat; background-size:100% 100%; color:#fff;}
+#bg ul.father{ text-indent:1em; display:none;}
+
+#login{position:relative; top:150px; width:544px;height:264px; background:url(../img/mlogin.jpg) no-repeat;}
+#login .top_logo {position: relative; top: -100px; left: 50px; width: 80px; height: 80px; }
+#login .top_logo img {width: 100%; height: 100%; border: 1px solid #0B8A77!important; border-radius: 50px;}
+#login .login_title{position:relative; top:-170px; left:175px; color: #fff; font-family:Microsoft YaHei; font-size:20px; font-weight: bold;}
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px #fff inset; }
+#login input{outline: none;display:block; border:0; padding-left:5px; width:31%;}
+#login #ln{position:absolute; top:28%;left:52.3%;  }
+#login #pw{position:absolute; top:50%;left:52.3%;}
+#login #btnSubmit{position:absolute; top:72%;left:65%;display:block; color:#fff; font-weight:bold;}
+#login #btnSubmit:hover{ cursor:pointer; }
+/*页脚*/
+#footer{position: fixed; bottom: 30px; width: 1350px; color:#fff;}
+/*Excel表格*/
+#dataTable tr td{ text-align:center; font-weight:bold; font-family:Microsoft YaHei; font-size:18px; color:#009966;}
+
+/*待审批的表格*/
+.table_pendingLns{margin:0;padding:0; text-align:center;}
+.table_pendingLns td {min-width:20px; margin:3px; padding:3px;}
+.table_pendingLns td a {min-width:20px; margin:3px; padding:3px;}
+
+/*留言区域*/
+.messageList{ position:relative; width:auto; min-height:70px; margin:0 0 20px 0; padding:0 0 20px 60px; font-size:12px;}
+.messageList .messageList_img{ position:absolute; left:5px; top:5px; width:50px; height:50px;}
+.messageList .messageList_uname{position:absolute; top:55px; left:5px; width:50px; text-align:center;}
+.messageList .messageList_content{}
+.messageList .replyContainer{position:relative; bottom:0px; right:0px;width:100%; min-height:10px; padding-top:20px;}
+.messageList .replyContainer .messageList_time{position:absolute; top:0px; right:35px;}
+.messageList .replyContainer .messageList_reply{position:absolute; top:0px; right:5px;}
+.messageList .replyContainer .div_reply{width:50;}
+.bkg_deep { background:#E0FFFF;}
+
+/*分页按钮样式*/
+.pagingArea{ position:relative; min-height:450px; margin:5px 0; padding:0 0 20px 0;}
+.pagingArea .pagingArea_content{ min-height:100px; height:auto; padding:3px;}
+.pagingArea .pagingArea_index{position:absolute; height:20px; right:0px; bottom:5px;}
+.pagingArea_index .pageBtnGroup{ float:right;}
+.pagingArea_index a{margin:0 3px; text-decoration:underline; color:Blue; font-size:12px;}
+.pagingArea_index a.crtPage{ text-decoration:none;}
+.pagingArea_index .pageIndexBlock{display:inline;}
+
+/*头像*/
+.red_border {
+  background: #c1d4d8;
+  border-radius: 50px;
+}
+.blue_border {
+  background: #e8e8e8;
+  border-radius: 50px;
+}

@@ -1,0 +1,17 @@
+﻿* 
+{
+	white-space:normal;
+}
+table
+{
+	width:100%;
+}
+p,span
+{
+	font-family:"微软雅黑","sans-serif";
+	font-size: 15px;
+	line-height: 1.2em;
+	text-indent:0pt!important;
+	margin-left:0!important;
+}
+#content_frame{min-height:700px;}

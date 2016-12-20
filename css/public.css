@@ -1,0 +1,293 @@
+/* CSS Document */
+html, body 
+{
+	font: Helvetica,Arial,"Hiragino Sans GB",STXihei,"华文细黑","Microsoft YaHei","微软雅黑",SimHei,"黑体",SimSun,"宋体",sans-serif;
+	font-family: "微软雅黑";
+	height: 100%;/* The html and body elements cannot have any padding or margin. *//*overflow-x:hidden;擦去导航的滚动条*/
+	background: url(../img/background1.gif);
+}
+/**设置滚动条的样式**/
+::-webkit-scrollbar {
+    width: 10px;
+}
+/**滚动槽**/
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px #d1cfcf; 
+    border-radius: 10px;
+}
+/**滚动条滑块**/
+::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    background: #ddd; 
+    -webkit-box-shadow: inset 0 0 6px #d1cfcf; 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(245,245,245,0.4); 
+}
+
+/*导航颜色*/
+.navbar-inverse
+{
+    background:url(../img/gra_nav.jpg) no-repeat;
+    background-size:100%;
+}
+/*文本超范围省略*/
+p
+{
+	overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+/*锁定主体尺寸，并且两边留白*/
+.bodySize
+{
+	width:1024px; margin:0 auto; background-color:#fff; padding:0px!important;
+}
+	
+/*登录注册模态窗口尺寸*/
+.sign-frame {
+	width: 100%;
+	height: 400px;
+}
+/*登录注册按钮组*/
+ul.sign-in 
+{
+	float:right;
+	list-style: none;
+	margin: 35px 25px 5px 15px;
+}
+.sign-in li
+{
+	display:inline;
+}
+ul.sign-in a
+{
+	font-size:12px;
+	color:#000;
+}
+a:hover
+{
+	color:#019934;
+	text-decoration:underline;
+}
+/*登录注册状态切换*/
+.show-off
+{
+	display:none;
+}
+.show-on
+{
+	display:block;
+}
+/*页头*/
+.header 
+{
+	width:100%;
+	min-height:140px;
+	margin: 0px;
+	background: url(../img/top.jpg) no-repeat;
+	background-size:100% 100%;
+}
+
+/*导航*/
+.navwrapper 
+{
+	font-weight:normal;
+	max-width: 1140px;
+}
+.navbar 
+{
+	min-height:1em;
+	margin:0;
+    padding:0 0 0 5%;
+}
+.navbar .container
+{
+	padding:0px 5%;
+	width:1024px;
+}
+.navbar-nav > li > a
+{
+	font-weight:normal;
+	line-height:0.7em;
+}
+.navbar-nav > li > a:hover{background:url(../img/nav_hover.png) no-repeat; color:#fff;}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+  color: #fff;
+  background:url(../img/nav_hover.png) no-repeat;
+}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus{ color:#fff; }
+{color:#fff}
+.nav .span {
+	color: #FFF;
+	margin-top: 12px;
+	padding-right: 5px;
+}
+
+/*affix页内导航样式*/
+/**
+ * Scrollspy and affixed enhanced navigation to highlight sections and secondary
+ * sections of docs content.
+ */
+/* By default it's not affixed in mobile views, so undo that */
+.sidebar.affix {
+  position: static;
+}
+/* First level of nav */
+.top_img{background:url(../img/top_kcgs.jpg) no-repeat; background-size:100% 100%; width:246px;height:43px; margin-left:5px;}
+.sidenav 
+{
+	margin:0 30px 30px 5px!important;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background-color: #f7f7f8;
+	border-radius: 5px;
+}
+.sidebar .nav > li > a { display: block; color: #000; font-size:15px; padding: 5px 38px 5px 30px;background:#fff; background-size:100% 100%;  -webkit-transition:all 0.5s;-moz-transition:all 0.5s;-o-transition:all 0.5s;}
+.sidebar .nav > li > a > #sectionTitle {width:8em; height:1em; line-height:1em; padding-bottom:1em; display:inline-block;overflow: hidden;  white-space:nowrap; text-overflow:ellipsis;}
+.sidebar .sidenav > li.active > a,
+.sidebar .sidenav > li > a:hover,
+.sidebar .sidenav > li > a:focus {color:#fff!important; background:#019934!important; -webkit-transition:all 0.5s;-moz-transition:all 0.5s;-o-transition:all 0.5s;}
+.sidebar .nav > li > .father li{padding-left:0px; left:0;}
+.sidebar .nav > li > .father li a{margin-left:20px; background:inherit; color:#000; white-space:nowrap; text-overflow:ellipsis;}
+.sidebar .nav > li > .father li:hover{ left:10px; -webkit-transition:all 1s;-moz-transition:all 1s;-o-transition:all 1s;}
+.sidebar .nav > li > .father li a:focus{color:#FF3300; left:10px;}
+.sidebar .nav > li > .father li a:hover::before,
+.sidebar .nav > li > .father li a:focus::before{content:url(../img/icon1.png);}
+
+
+
+
+.sidebar .nav .father { display: none;}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+  .sidebar .nav > .active > ul {
+    display: block;
+  }
+  /* Widen the fixed sidebar */
+  .sidebar.affix,
+  .sidebar.affix-bottom {
+    width: 213px;
+  }
+  .sidebar.affix {
+    position: fixed;
+    /* Undo the static from mobile first approach */
+    top: 80px;
+  }
+  .sidebar.affix-bottom {
+    position: absolute;
+    /* Undo the static from mobile first approach */
+  }
+  .sidebar.affix-bottom .sidenav,
+  .sidebar.affix .sidenav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1200px) {
+  /* Widen the fixed sidebar again */
+  .sidebar.affix-bottom,
+  .sidebar.affix {
+    width: 263px;
+  }
+}*/
+.row{
+	margin:0px;
+	}
+/*固定页脚及主体样式*/ 
+/* Wrapper for page content to push down footer */
+#wrap {
+	min-height: 100%;
+	margin: 0 auto 0px;
+	padding: 0 0 0px;
+}
+#footer {
+	height: 100px;
+	background-color: #f5f5f5;
+	border:2px solid rgb(215,215,215);
+}
+#wrap > .container {
+	padding: 0px 15px 60px 15px;
+}
+#footer .container .text-muted {
+	margin: 15px 0 0;
+}
+#footer > .container 
+{
+	margin-top:20px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.row{position:relative;}
+#catalogue_frame{ position:absolute; left:1.6%; width:24%; background:#fff; border:1px solid #e8e8e8;  border-radius:3px; min-height:100%; box-shadow:2px 2px 3px #aaaaaa;}
+#content_frame{ width:100%; min-height:100%;border:1px solid #e8e8e8;padding:3px; box-shadow:-2px 2px 3px #aaa;}
+/*响应左侧导航栏调整*/
+@media (max-width:992px)
+{
+	#catalogue_frame{ display:none;}
+	.affix-top{ position:static!important;}
+	.sidebar .nav > .active > ul {
+    display: block;
+  }
+}
+/*affix*/
+#toc{}
+.affix-top{position:absolute;width:100%; }
+.affix-bottom{position:absolute;}
+ul.nav-tabs{
+    width: 94%;
+    margin-top: 20px;
+    margin-left:1.6%;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+}
+ul.nav-tabs li{
+    margin: 0;
+    border-top: 1px solid #ddd;
+}
+ul.nav-tabs li:first-child{
+    border-top: none;
+}
+ul.nav-tabs li a{
+    margin: 0;
+    padding: 8px 16px;
+    border-radius: 0;
+}
+ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover{
+    border:0px !important;
+}
+ul.nav-tabs li:first-child a{
+    border-radius: 4px 4px 0 0;
+}
+ul.nav-tabs li:last-child a{
+    border-radius: 0 0 4px 4px;
+}
+ul.nav-tabs.affix{
+    top: 30px; /* Set the top position of pinned element */
+}
+/*面包屑导航*/
+.breadcrumb
+{
+	font-size:12px;
+	display:inline; padding:0; background:#f5f5f5;
+}
+#nav_position{width:1024px; height:30px; margin:4px 0 3px 0; background:#f5f5f5; border-top:1px solid #ddd;}
+/*面包屑及sknw*/
+.dividing { height: 17px; margin: 25px 0 45px; border-bottom: 1px solid #D8D8D8; text-align: center;}
+.dividing h2 { margin:0px; display: inline-block; padding: 0 30px; font-size: 22px; background: #FFF;}
+.skew{background-color: #019934; display: inline-block;transform: skew(-20deg);-webkit-transform: skew(-20deg);-moz-transform: skew(-20deg);  padding: 2px 30px;  color: #FFF;}
+label.skew i{  display: inline-block;  transform: skew(20deg);  -webkit-transform: skew(20deg);  -moz-transform: skew(20deg);  font-style: normal;}
+
+/*分页按钮样式*/
+.pagingArea{ position:relative; min-height:500px; margin:5px 0; padding:0 0 20px 0;}
+.pagingArea .pagingArea_content{ min-height:100px; height:auto; padding:3px;}
+.pagingArea .pagingArea_index{position:absolute; height:20px; right:0px; bottom:5px;}
+.pagingArea_index .pageBtnGroup{ float:right;}
+.pagingArea_index a{margin:0 3px; text-decoration:underline; color:Blue; font-size:12px;}
+.pagingArea_index a.crtPage{ text-decoration:none;}
+.pagingArea_index .pageIndexBlock{display:inline;}
+
+/*红边框（老师头像用）*/
+.red_border{ background:#c1d4d8; border-radius:50px;}
+.blue_border{ background:#e8e8e8; border-radius:50px;}
